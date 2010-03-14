@@ -1,0 +1,17 @@
+#!/bin/bash 
+
+function usage() 
+{
+	echo "Usage: $0 username password"
+	exit $1 
+} >&2 
+ 
+# assure two readable arg
+if (( $# != 2 )); then 
+	usage 1 
+fi
+USERNAME=$1
+PASSWORD=$2
+
+curl -c cookies.txt -d "j_username=$USERNAME&j_password=$PASSWORD" http://localhost:9090/project_name/j_spring_security_check
+echo "File cookies.txt created."

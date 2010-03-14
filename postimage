@@ -1,0 +1,16 @@
+#!/bin/bash 
+
+function usage() 
+{
+	echo "Usage: $0 filepath"
+	exit $1 
+} >&2 
+
+# assure 1 readable arg
+if (( $# != 1 )); then 
+	usage 1 
+fi
+FILEPATH=$1
+
+curl -b cookies.txt -F file=@$FILEPATH -F press=OK http://localhost:9090/project_name/picture/save
+echo "HTTP POST request sent with $FILEPATH."
